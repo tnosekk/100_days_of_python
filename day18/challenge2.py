@@ -1,10 +1,10 @@
 from turtle import Screen, Turtle
 
 tim = Turtle()
-for _ in range(25):
-    tim.forward(2)
+for _ in range(15):
+    tim.forward(10)
     tim.penup()
-    tim.forward(2)
+    tim.forward(10)
     tim.pendown()
 
 screen = Screen()
