@@ -1,6 +1,6 @@
-import turtle
-from turtle import Turtle, Screen
 import random as rand
+import turtle
+from turtle import Screen, Turtle
 
 tim = Turtle()
 turtle.colormode(255)
@@ -23,8 +23,8 @@ def draw_circle_with_color(radius):
 
 
 angle = 0
-angle_change = 7
-iterations = int(360/angle_change)
+angle_change = 3
+iterations = int(360 / angle_change)
 
 for _ in range(iterations):
     tim.setheading(angle)
