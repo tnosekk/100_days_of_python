@@ -13,12 +13,8 @@ l_paddle = Paddle((-350, 0))
 
 screen.listen()
 screen.onkey(r_paddle.go_up, "Up")
-screen.listen()
 screen.onkey(r_paddle.go_down, "Down")
-screen.update()
-screen.listen()
 screen.onkey(l_paddle.go_up, "w")
-screen.listen()
 screen.onkey(l_paddle.go_down, "s")
 
 
