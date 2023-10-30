@@ -30,7 +30,7 @@ while game_is_on:
     time.sleep(delay)
     snake.move()
 
-    if snake.head.distance(food) < 15:
+    if snake.head.distance(food) < 20:
         food.refresh()
         snake.extend()
         delay -= 0.005
@@ -44,11 +44,13 @@ while game_is_on:
     ):
         scoreboard.reset()
         snake.reset()
+        delay = 0.1
 
     for segment in snake.segments[1:]:
         if segment == snake.head:
             pass
         elif snake.head.distance(segment) < 10:
             scoreboard.reset()
+            delay = 0.1
 
 screen.exitonclick()
