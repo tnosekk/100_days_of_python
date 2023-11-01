@@ -33,10 +33,7 @@ while len(guessed_states) < 50:
 
     state_data = data[data["state"] == answer_state]
     if answer_state == "Exit":
-        not_guessed = []
-        for state in states_list:
-            if state not in guessed_states:
-                not_guessed.append(state)
+        not_guessed = [state for state in states_list if state not in guessed_states]
 
         to_learn_df = pd.DataFrame(not_guessed)
         to_learn_df.to_csv("day25/U.S-state-quiz/states_to_learn.csv")
