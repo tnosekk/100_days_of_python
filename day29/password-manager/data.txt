@@ -1,10 +1,1 @@
-newside	|	email@gmail.com	|	newpassword
-sidee	|	email@gmail.com	|	pass
-amazon	|	email@gmail.com	|	passw
-amazon	|	email@gmail.com	|	pass
-amaazon	|	email@gmail.com	|	dfasdfasf
-asdfasdf	|	email@gmail.com	|	asdasdf
-	|	email@gmail.com	|	
-	|	email@gmail.com	|	
-asdfasdf	|	email@gmail.com	|	asdf
-proba 1	|	email@gmail.com	|	proba2
+my_site.com	|	email@gmail.com	|	bI6nTNCO$%Z(uU8!8aO20)HK+GbDT+8
