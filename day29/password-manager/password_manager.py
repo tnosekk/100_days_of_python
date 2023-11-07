@@ -1,3 +1,4 @@
+import json
 from random import choice, randint, shuffle
 from tkinter import *
 from tkinter import messagebox
@@ -83,26 +84,53 @@ def save():
     website = website_entry.get()
     password = pass_entry.get()
     email = email_entry.get()
-    user_data = f"{website}\t|\t{email}\t|\t{password}\n"
+    new_data = {
+        website: {
+            "email": email,
+            "password": password,
+        }
+    }
 
     if len(website) != 0 and len(password) != 0 and len(email) != 0:
-        is_ok = messagebox.askokcancel(
-            title=website,
-            message=f"These are your data:\n"
-            f"website: {website}\n"
-            f"email: {email}\n"
-            f"password: {password}\n"
-            "Is this ok to save?",
-        )
-        if is_ok:
-            with open(file="day29/password-manager/data.txt", mode="a") as file:
-                file.write(user_data)
-                website_entry.delete(0, END)
-                pass_entry.delete(0, END)
+        try:
+            with open(file="day29/password-manager/data.json", mode="r") as file:
+                data = json.load(file)
+
+        except FileNotFoundError:
+            with open(file="day29/password-manager/data.json", mode="w") as file:
+                file.write("{}")
         else:
-            pass
+            data.update(new_data)
+            with open(file="day29/password-manager/data.json", mode="w") as file:
+                json.dump(data, file, indent=4)
+        finally:
+            website_entry.delete(0, END)
+            pass_entry.delete(0, END)
     else:
         messagebox.showwarning(title="Warning", message="Don't leave any field empty")
+
+
+# ---------------------------- SEARCH  ------------------------------- #
+
+
+def find_password():
+    # search for key in data. json file
+    # display messagebox showing pass and email for given website
+    # check KeyNotFound error
+    website = website_entry.get()
+    try:
+        with open(file="day29/password-manager/data.json", mode="r") as data:
+            website_data = json.load(data)
+            email = website_data[website]["email"]
+            password = website_data[website]["password"]
+    except KeyError:
+        messagebox.showinfo(title="error", message="Website not found")
+    except FileNotFoundError:
+        messagebox.showinfo(title="error", message="No Data File Found")
+    else:
+        messagebox.showinfo(
+            title="Website credentials", message=f"email: {email}\npasssord: {password}"
+        )
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -126,8 +154,8 @@ email_label.grid(column=0, row=2)
 pass_label = Label(text="Password:")
 pass_label.grid(column=0, row=3)
 
-website_entry = Entry(width=38)
-website_entry.grid(column=1, row=1, columnspan=2)
+website_entry = Entry(width=21)
+website_entry.grid(column=1, row=1, columnspan=1)
 website_entry.focus()
 
 email_entry = Entry(width=38)
@@ -137,8 +165,12 @@ email_entry.insert(0, "email@gmail.com")
 pass_entry = Entry(width=21)
 pass_entry.grid(column=1, row=3)
 
+search_button = Button(text="Search", width=13, command=find_password)
+search_button.grid(column=2, row=1)
+
 generate_button = Button(text="Generate Password", command=generate_password)
 generate_button.grid(column=2, row=3, padx=0)
+
 
 add_button = Button(width=36, text="Add", command=save)
 add_button.grid(column=1, row=4, columnspan=2)
