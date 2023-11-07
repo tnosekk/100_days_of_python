@@ -1,7 +1,6 @@
 import json
 from random import choice, randint, shuffle
-from tkinter import *
-from tkinter import messagebox
+from tkinter import END, Button, Canvas, Entry, Label, PhotoImage, Tk, messagebox
 
 import pyperclip
 
@@ -9,6 +8,7 @@ import pyperclip
 
 
 def generate_password():
+    """Generating random password including letters, numbers, and symbols"""
     letters = [
         "a",
         "b",
@@ -81,6 +81,7 @@ def generate_password():
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save():
+    """Save password and mail for given website and store it in data.json file`"""
     website = website_entry.get()
     password = pass_entry.get()
     email = email_entry.get()
@@ -93,15 +94,21 @@ def save():
 
     if len(website) != 0 and len(password) != 0 and len(email) != 0:
         try:
-            with open(file="day29/password-manager/data.json", mode="r") as file:
+            with open(
+                file="day29/password-manager/data.json", mode="r", encoding="utf-8"
+            ) as file:
                 data = json.load(file)
 
         except FileNotFoundError:
-            with open(file="day29/password-manager/data.json", mode="w") as file:
+            with open(
+                file="day29/password-manager/data.json", mode="w", encoding="utf-8"
+            ) as file:
                 file.write("{}")
         else:
             data.update(new_data)
-            with open(file="day29/password-manager/data.json", mode="w") as file:
+            with open(
+                file="day29/password-manager/data.json", mode="w", encoding="utf-8"
+            ) as file:
                 json.dump(data, file, indent=4)
         finally:
             website_entry.delete(0, END)
@@ -114,12 +121,12 @@ def save():
 
 
 def find_password():
-    # search for key in data. json file
-    # display messagebox showing pass and email for given website
-    # check KeyNotFound error
+    """Finding password and email based on given website on website entry"""
     website = website_entry.get()
     try:
-        with open(file="day29/password-manager/data.json", mode="r") as data:
+        with open(
+            file="day29/password-manager/data.json", mode="r", encoding="utf-8"
+        ) as data:
             website_data = json.load(data)
             email = website_data[website]["email"]
             password = website_data[website]["password"]
