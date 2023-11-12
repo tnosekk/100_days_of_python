@@ -84,6 +84,7 @@ title_label.grid(column=1, row=0)
 session_count = Label(text="", font=(FONT_NAME, 40, "bold"), bg=YELLOW, fg=GREEN)
 session_count.grid(column=1, row=3)
 
+
 start_b = Button(
     text="start",
     width=1,
