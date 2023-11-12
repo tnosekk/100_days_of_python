@@ -11,16 +11,18 @@ window = Tk()
 window.title("Flashy")
 window.config(padx=50, pady=50, bg=BACKGROUND_COLOR)
 
-canvas = Canvas(width=900, height=600, bg=BACKGROUND_COLOR, highlightthickness=0)
+canvas = Canvas(width=800, height=526, bg=BACKGROUND_COLOR, highlightthickness=0)
 flash_front = PhotoImage(file="day31/flash-card-project-start/images/card_front.png")
-canvas.create_image(450, 300, image=flash_front)
+canvas.create_image(400, 263, image=flash_front)
+canvas.create_text(
+    400, 150, text="French", font=("Ariel", 40, "italic"), fill="#000000"
+)
+canvas.create_text(
+    400, 263, text="French word", font=("Ariel", 60, "bold"), fill="#000000"
+)
+
+
 canvas.grid(column=0, row=0, columnspan=2)
-
-french_label = Label(text="French", font=("Arienl", 40, "italic"))
-french_label.grid(column=0, row=0, columnspan=2)
-
-french_word = Label(text="french_word", font=("Ariel", 40, "italic"))
-french_word.grid(column=0, row=0, columnspan=2)
 
 
 right_image = PhotoImage(file="day31/flash-card-project-start/images/right.png")
